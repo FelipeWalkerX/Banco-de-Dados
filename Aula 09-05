@@ -1,0 +1,37 @@
+select * from ambulatorio, medicos // Ta errado, pois ele vai mostrar uma cacetada de coisa na tabela, vai multiplicar o que ta dentro de ambulatorio com o o que ta dentro de medicos
+
+//O correto é:
+select * from ambulatorios join medicos on ambulatorios.nroa = medicos.nroa; //Sendo o * para acessar tudo da tabela, o join para juntar as tabelas ambulatorios e medicos. 
+                                                                            //Tambem podemos ver que tem ambulatorios.nroa = medicos.nroa, sendo o .nroa é a chave primaria no ambulatorio sendo igualada a medicos, por possuir a mesma chave, mas sendo estrangeira
+                                                                            //Join (sem nada), funciona como se fosse um inner join, caso queira usar o left, right e natural join, preciso declarar o nome antes do join, se nao ele ira entender como um inner join
+ A resolucao dos exercicios:
+1) Buscar o nome e CPF dos médicos  e o numero de ambulatorio e o andar  que os mesmos trabalham. 
+select nome, cpf, m.nroa, andar from medicos as m join ambulatorios as a on m.nroa = a.nroa ;
+
+2) Buscar nome, CPF dos médicos  e o numero de ambulatorio e o andar  que os mesmos trabalham, mas somente dos médicos com idade maior que 31 anos.
+select nome, cpf, m.nroa, andar from medicos as m join ambulatorios as a on m.nroa = a.nroa where idade>31;
+
+3) nome e CPF dos médicos que também são pacientes do hospital
+select m.nome, m.cpf from medicos as m join pacientes as p on m.cpf = p.cpf;
+
+Tentar resolver em casa:
+
+4) pares (código, nome) de funcionários e de médicos que residem na mesma cidade
+
+5) código e nome dos pacientes com consulta marcada para horários após às 14 horas
+
+6) número e andar dos ambulatórios utilizados por médicos ortopedistas
+
+7) nome e CPF dos pacientes que têm consultas marcadas entre os dias 14 e 16 de junho de 2006
+
+8) nome e idade dos médicos que têm consulta com a paciente Ana
+
+9) código e nome dos médicos que atendem no mesmo ambulatório do médico Pedro e que possuem consultas marcadas para dia 14/06/2006
+
+10) nome, CPF e idade dos pacientes que têm consultas marcadas com ortopedistas para dias anteriores ao dia 16
+
+11) nome e salário dos funcionários que moram na mesma cidade do funcionário Carlos e possuem salário superior ao dele
+
+12) dados de todos os ambulatórios e, para aqueles ambulatórios onde médicos dão atendimento, exibir também os seus códigos e nomes
+
+13) CPF e nome de todos os médicos e, para aqueles médicos com consultas marcadas, exibir os CPFs e nomes dos seus pacientes e as datas das consultas
