@@ -1,0 +1,31 @@
+create table bkp_medicos as select * from medicos; // Criar uma copia da tabela medicos e chamando ela de bkp_medicos
+create table bkp_medicos2 as select * from medicos where 1=0; // Criando uma tabela (copia de medicos), mas sem nenhum dado (ate que se voce der um "select * from bkp_medicos2", vai retornar "Empty set (0.00 sec)")
+No sqlDeveloper é diferente para inserir os dados
+
+Ver com ele sobre stored procedure, que entendi porra nenhuma
+
+Ver o que ta dando de errado:
+Create table FUNCIONARIO
+(cod_func integer,
+nome varchar2 (20));
+
+CREATE OR REPLACE PROCEDURE "SP_FUNCIONARIO" (
+ vCOD_FUNC INTEGER,
+ vNOME VARCHAR2,
+ vOPR CHAR)
+IS
+vEXCEPTION EXCEPTION;
+BEGIN
+ IF (vOPR = 'I') THEN
+ INSERT INTO FUNCIONARIO(COD_FUNC, NOME) VALUES (vCOD_FUNC, vNOME);
+ ELSE
+ RAISE vEXCEPTION;
+ END IF;
+ EXCEPTION
+ WHEN vEXCEPTION THEN
+ RAISE_APPLICATION_ERROR(-20999,'ATENÇÃO! Operação diferente de I (Insercao).', FALSE);
+ END SP_FUNCIONARIO;
+
+exec SP_FUNCIONARIO (11, 'Fulano', 'I');
+
+SELECT * FROM FUNCIONARIO;
