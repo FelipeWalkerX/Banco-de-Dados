@@ -1,0 +1,25 @@
+1)
+
+2) select nome, cpf from funcionarios where cpf like '%00000%';		//% serve pra filtrar, se tiver %a, ele mostra tudo que tiver com final a, se tiver a%, mostra tudo que tiver com comeco a
+
+3) select nome, especialidade from medicos where nome like 'a%a';	//Se tiver a%a, mostra tudo que tiver com comeco e final a, se tiver %a%, mostra tudo que tem pelo menos uma letra a no nome
+
+4) select count(*), cidade from funcionarios group by cidade;		//count(*): serve pra mostrar a quantidade do que quiser
+
+5) select count(*), especialidade from medicos group by especialidade having count(*) > 1;	//having: funciona como se fosse um where, so que pra funcoes de grupo
+
+6) update funcionarios set salario = salario+80 where cidade = 'Florianopolis'; 		// update: atualizar algum dado, por ex.: salario+80, ele vai aumentar 80 no salario
+
+7) update consultas set hora = '17:00:00' where codm=4;				
+
+8) select p.codp, nome, hora from pacientes as p inner join consultas as c on p.codp=c.codp where hora > '14:00:00';	//p.codp ... pacientes as p: declarando que o codp de pacientes é o p.codp. Ja o de consultas, é c.codp || p.codp=c.codp: Juntando as duas tabelas
+
+9) select m.nome, m.especialidade, m.nroa, a.capacidade from medicos as m inner join ambulatorios as a on m.nroa = a.nroa;	//se for usar inner join, nao precisa do inner, pode so escrever join
+
+10) select m.nome, m.especialidade, m.nroa, a.capacidade from medicos as m left join ambulatorios as a on m.nroa = a.nroa;	//left join: da prioridade a tabela esquerda do join || se a tabela medicos estivesse depois do join, teria que usar right join
+
+11) select m.nome, p.cpf from medicos as m right join pacientes as p on m.cpf=p.cpf; //Isso nao é subconsulta, é juncao kskksks
+
+	Resposta certa: select nome, cpf from medicos where cpf in (select cpf from pacientes);		//Ele faz 2 consultas dentro de uma
+
+12) select nome from pacientes where codp in(select count(*) from pacientes as p join consultas as c group by p.codp=c.codp having count(*) > 1);
