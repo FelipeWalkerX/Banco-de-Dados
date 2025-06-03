@@ -1,0 +1,10 @@
+1) π primeiro_nome, ultimo_nome, endereco (σ numDepto = 5 (Empregado))
+
+1) Outra forma: result_sel <- σ numDepto = 5 (Empregado)
+		π primeiro_nome, ultimo_nome, endereco (result_sel)
+
+2) R <- σ nomeDepto = 'Pesquisa' (Departamento)
+   π primeiro_nome, endereco (R ⋈_(R num_Depto = empregado.numDepto) Empregado)
+
+5) empDep <- Empregado ⋈_(numEmpregado = empregado.numEmpregado) Dependente
+π primeiro_nome, ultimo_nome (empDep)
